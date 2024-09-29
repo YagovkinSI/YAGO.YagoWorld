@@ -9,10 +9,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["YAGO.YagoWorld.Host/YAGO.YagoWorld.Host.csproj", "YAGO.YagoWorld.Host/"]
-RUN dotnet restore "./YAGO.YagoWorld.Host/YAGO.YagoWorld.Host.csproj"
+COPY ["YAGO.YagoWorld.Host.csproj", "./"]
+RUN dotnet restore "./YAGO.YagoWorld.Host.csproj"
 COPY . .
-WORKDIR "/src/YAGO.YagoWorld.Host"
+WORKDIR "/src"
 RUN dotnet build "./YAGO.YagoWorld.Host.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
